@@ -22,9 +22,11 @@ namespace SecurityEntrance
     public partial class MainWindow : Window
     {
         public ObservableCollection<Employee> ListEmployee { get; set; }
+        public ObservableCollection<DayCheckedInfo> daysChecked { get; set; }
         public MainWindow()
         {
             ListEmployee = new ObservableCollection<Employee>();
+            daysChecked = new ObservableCollection<DayCheckedInfo>();
             InitializeComponent();
 
             Employee employee1 = new Employee { Id = 1, Name = "Muhammad", Position = "SEO" };
@@ -50,10 +52,8 @@ namespace SecurityEntrance
 
         private void CheckAbsent(object sender, RoutedEventArgs e)
         {
-            CheckAbsent checkWindow = new CheckAbsent(ListEmployee);
+            CheckAbsent checkWindow = new CheckAbsent(ListEmployee,daysChecked);
             checkWindow.Show();
-
-
         }
     }
 }

@@ -20,38 +20,48 @@ namespace SecurityEntrance
     /// </summary>
     public partial class CheckAbsent : Window
     {
-
-        public ObservableCollection<DayCheckedInfo> daysChecked { get; set; }
         public ObservableCollection<Employee> defaultListEmployees { get; set; }
+        public ObservableCollection<DayCheckedInfo> daysChecked { get; set; }
 
         public CheckAbsent()
         {
             InitializeComponent();
         }
 
-        public CheckAbsent(ObservableCollection<Employee> listEmployeeFromMainWindows)
+        public CheckAbsent(ObservableCollection<Employee> listEmployeeFromMainWindows, ObservableCollection<DayCheckedInfo> daysCheckedFromMainWindows)
         {
             InitializeComponent();
+            daysChecked = daysCheckedFromMainWindows;
             defaultListEmployees = new ObservableCollection<Employee>();
             defaultListEmployees = listEmployeeFromMainWindows;
-            DayCheckedInfo infoDataToday = new DayCheckedInfo();
-            foreach (Employee e in listEmployeeFromMainWindows)
-            {
-                InfoCheckEmployee temp = new InfoCheckEmployee();
-                temp.Id = e.Id;
-                temp.Name = e.Name;
-                temp.Position = e.Position;
-                infoDataToday.infoEmployees.Add(temp);
-            }
-            infoDataToday.dayChecked = DateTime.Today;
-            daysChecked = new ObservableCollection<DayCheckedInfo>();
-            daysChecked.Add(infoDataToday);
 
-            employeeList.ItemsSource = daysChecked.Last().infoEmployees;
+            if (daysCheckedFromMainWindows.Count == 0)
+            {
+                DayCheckedInfo infoDataToday = new DayCheckedInfo();
+                foreach (Employee e in listEmployeeFromMainWindows)
+                {
+                    InfoCheckEmployee temp = new InfoCheckEmployee();
+                    temp.Id = e.Id;
+                    temp.Name = e.Name;
+                    temp.Position = e.Position;
+                    infoDataToday.infoEmployees.Add(temp);
+                }
+                daysCheckedFromMainWindows.Add(infoDataToday);
+                infoDataToday.dayChecked = DateTime.Today;
+                employeeList.ItemsSource = daysCheckedFromMainWindows.Last().infoEmployees;
+            }
+            else
+            {
+                for (int i = 0; i < daysCheckedFromMainWindows.Count; i++)
+                {
+                    if (daysCheckedFromMainWindows[i].dayChecked == DateTime.Today)
+                    {
+                        employeeList.ItemsSource = daysCheckedFromMainWindows[i].infoEmployees;
+                    }
+                }
+            }
             checkCalendar.SelectedDate = DateTime.Today;
         }
-        
-        
 
         private void checkCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
