@@ -1,0 +1,15 @@
+﻿<Window x:Class="SecurityEntrance.CheckAbsent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecurityEntrance"
+        mc:Ignorable="d"
+        Title="CheckAbsent" Height="300" Width="700">
+    <Grid>
+        <Calendar Name="checkCalendar" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <DataGrid Name="employeeList" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150 0 0 0" Width="450" Height="150">
+
+        </DataGrid>
+    </Grid>
+</Window>
