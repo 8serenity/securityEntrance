@@ -4,12 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SecurityEntrance"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="CheckAbsent" Height="300" Width="700">
     <Grid>
-        <Calendar Name="checkCalendar" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Calendar Language="English" Name="checkCalendar" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDatesChanged="checkCalendar_SelectedDatesChanged"/>
         <DataGrid Name="employeeList" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="150 0 0 0" Width="450" Height="150">
 
         </DataGrid>
+        <!--Text="{Binding Source={x:Static sys:DateTime.Today},
+                   StringFormat='{}{0:dd-MMM-yyyy}'}"-->
+        <TextBlock x:Name="todayText" Text="{Binding ElementName=checkCalendar,Path=SelectedDate,StringFormat=d}" HorizontalAlignment="Left" Margin="213,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="433" Height="38" TextAlignment="Center" FontSize="24">
+            
+        </TextBlock>
     </Grid>
 </Window>
